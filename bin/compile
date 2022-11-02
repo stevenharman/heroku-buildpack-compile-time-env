@@ -21,7 +21,7 @@ while IFS= read -r line; do
 
     if [[ ! -f "${ENV_DIR}/${var_name}" ]]; then
         # No Config Var found, move on to the next
-        echo "       Config Var: ${var_name} not found; skipping."
+        echo "       Config Var: ${var_name} not found; skipping"
         continue
     fi
 
