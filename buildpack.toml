@@ -1,0 +1,10 @@
+[buildpack]
+id = "stevenharman/compile-time-env"
+version = "1.0.0"
+name = "Compile-Time Env"
+homepage = "https://github.com/stevenharman/heroku-buildpack-compile-time-ruby"
+
+[publish]
+
+[publish.Ignore]
+files = []
