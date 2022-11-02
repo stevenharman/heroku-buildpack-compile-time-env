@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir> <env-dir>
+# This buildpack writes allow-listed Config Vars to the ./export file, which
+# Heroku will source for the compile phase of later buildpacks.
+
+set -o errexit  # always exit on error
+set -o pipefail # don't ignore exit codes when piping output
+set -o nounset  # fail on unset variables
+
+BP_DIR=$(cd "$(dirname "${0:-}")"; cd ..; pwd)
+BUILD_DIR=${1:-}
+# CACHE_DIR=${2:-}
+ENV_DIR=${3:-}
+
+echo "-----> Parsing .compile-time-env file"
+while IFS= read -r line; do
+    # Skip lines that start with a comment
+    [[ "$line" =~ ^[[:space:]]*# ]] && continue
+
+    var_name=${line}
+
+    if [[ ! -f "${ENV_DIR}/${var_name}" ]]; then
+        # No Config Var found, move on to the next
+        echo "       Config Var: ${var_name} not found; skipping."
+        continue
+    fi
+
+    var_value=$(cat "${ENV_DIR}/${var_name}")
+    echo "       Exporting Config Var: ${var_name}"
+
+    echo "export ${var_name}=\"${var_value}\"" >> "${BP_DIR}/export"
+done <"${BUILD_DIR}/.compile-time-env"
