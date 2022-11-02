@@ -5,7 +5,7 @@ BUILD_DIR=${1:-}
 
 # This buildpack applies to Apps with a .compile-time-env file in the root
 if [ -f "${BUILD_DIR}/.compile-time-env" ]; then
-    echo "-----> Found .compile-time-env file "
+    echo "compile-time-env"
     exit 0
 else
     exit 1
