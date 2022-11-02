@@ -7,7 +7,7 @@ Heroku [Buildpack][buildpacks] to make [Config Vars][config-vars] available as d
 Create a `.compile-time-env` file in the root of your App/repository.
 Add Config Var names you want to export (one per line):
 
-```shell
+```console
 $ cat .compile-time-env
 SOME_ENV_VAR
 # lines starting with # are considered comments, and will be skipped
@@ -17,8 +17,8 @@ ANOTHER_VAR
 Add this Buildpack as the first Buildpack in your App.
 Or, at least before other Buildpacks that need the Config Vars.
 
-```shell
-$ heroku buildpacks:add --index 1 --app=my-app https://github.com/stevenharman/heroku-buildpack-compile-time-env
+```console
+heroku buildpacks:add --index=1 --app=my-app https://github.com/stevenharman/heroku-buildpack-compile-time-env
 ```
 
 On the next deploy the Config Vars specified in the `.compile-time-env` file will be available in the Slug compilation phase. 
