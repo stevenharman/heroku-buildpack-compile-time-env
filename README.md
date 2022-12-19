@@ -1,6 +1,6 @@
 # compile-time-env
 
-Heroku [Buildpack][buildpacks] to make [Config Vars][config-vars] available during Slug compilation.
+A Heroku [Buildpack][buildpacks] to make [Config Vars][config-vars] available during Slug compilation.
 
 ## How to use it
 
@@ -18,7 +18,7 @@ Add this Buildpack as the first Buildpack in your App.
 Or, at least before other Buildpacks that need the Config Vars.
 
 ```console
-heroku buildpacks:add --index=1 stevenharman/compile-time-env --app=<YOUR-APP-NAME>
+$ heroku buildpacks:add --index=1 stevenharman/compile-time-env --app=<YOUR-APP-NAME>
 ```
 
 On the next deploy the Config Vars specified in the `.compile-time-env` file will be available in the Slug compilation phase. 
